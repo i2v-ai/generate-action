@@ -1,6 +1,24 @@
-# Generate media with i2v.ai
+<p align="center">
+  <a href="https://i2v.ai">
+    <img src="https://i2v.ai/brand/folded-rabbit-light.png" alt="i2v.ai" width="96">
+  </a>
+</p>
 
-A composite GitHub Action that quotes a media request, refuses to exceed your USD ceiling, submits it, waits for the result, and downloads the file.
+<h1 align="center">Generate media with i2v.ai</h1>
+
+<p align="center">
+  A composite GitHub Action that quotes a media request, refuses to exceed your USD ceiling, submits it, waits for the result and downloads the file.
+</p>
+
+<p align="center">
+  <a href="https://i2v.ai/cli"><img alt="Docs" src="https://img.shields.io/badge/docs-i2v.ai%2Fcli-6366f1?style=flat-square"></a>
+  <a href="https://www.npmjs.com/package/@i2v-ai/sdk"><img alt="SDK" src="https://img.shields.io/badge/SDK-%40i2v--ai%2Fsdk-0ea5e9?style=flat-square"></a>
+  <a href="./LICENSE"><img alt="License" src="https://img.shields.io/badge/license-MIT-22c55e?style=flat-square"></a>
+</p>
+
+<br>
+
+## Usage
 
 ```yaml
 name: Product image
@@ -11,7 +29,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - id: generate
-        uses: i2v-ai/i2v-agent-tools/action@main
+        uses: i2v-ai/generate-action@main
         with:
           api-key: ${{ secrets.I2V_API_KEY }}
           model: gpt-image-2
@@ -44,8 +62,29 @@ jobs:
 | `output-path` | Absolute path of the downloaded media file. |
 | `quote-amount` / `quote-currency` | Quoted maximum reservation. |
 
-The action also writes `<output-path>.task.json` with the quote, receipt, and final task for auditing. It never logs the API key.
+The action also writes `<output-path>.task.json` with the quote, receipt and final task for auditing. It never logs the API key.
 
 ## Why the ceiling matters
 
 Media generation is a paid action with a variable price. The action quotes first, compares the quote with `max-cost-usd`, and only then submits. If the quote is higher, the workflow fails without creating a task.
+
+## For AI agents
+
+- Agent index: <https://i2v.ai/llms.txt>
+- API documentation: <https://i2v.ai/llms-full.txt>
+
+## Related repositories
+
+| Repository | Purpose |
+| --- | --- |
+| [i2v-cli](https://github.com/i2v-ai/i2v-cli) | Command-line tools |
+| [i2v-sdk-js](https://github.com/i2v-ai/i2v-sdk-js) | TypeScript SDK |
+| [i2v-sdk-python](https://github.com/i2v-ai/i2v-sdk-python) | Python SDK |
+| [i2v-skills](https://github.com/i2v-ai/i2v-skills) | Agent Skills |
+| [i2v-mcp](https://github.com/i2v-ai/i2v-mcp) | Remote MCP metadata |
+| [i2v-api-examples](https://github.com/i2v-ai/i2v-api-examples) | Runnable examples |
+| [i2v-agent-tools](https://github.com/i2v-ai/i2v-agent-tools) | Ecosystem hub |
+
+## License
+
+MIT. See [LICENSE](./LICENSE).
